@@ -13,12 +13,12 @@ export default class TicketForm extends Component {
   constructor() {
     super();
     this.state = {
-      studentName: '',
+      student: '',
       problem: '',
-      expectedResult: '',
-      attemptedSolution: '',
-      suspectedIssue: '',
-      zoomLink: '',
+      expectations: '',
+      tried: '',
+      notWorking: '',
+      zoom: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,13 +34,14 @@ export default class TicketForm extends Component {
   async onSubmit(e) {
     e.preventDefault();
     const newTicket = {
-      student: this.state.studentName,
+      student: this.state.student,
+      problem: this.state.problem,
       header: 'Static for now',
       status: 'Open',
-      expectations: this.state.expectedResult,
-      tried: this.state.attemptedSolution,
-      notWorking: this.state.suspectedIssue,
-      zoom: this.state.zoomLink,
+      expectations: this.state.expectations,
+      tried: this.state.tried,
+      notWorking: this.state.notWorking,
+      zoom: this.state.zoom,
     };
 
     try {
@@ -50,12 +51,12 @@ export default class TicketForm extends Component {
         headers: { 'content-type': 'application/json' },
       });
       await this.setState({
-        studentName: '',
+        student: '',
         problem: '',
-        expectedResult: '',
-        attemptedSolution: '',
-        suspectedIssue: '',
-        zoomLink: '',
+        expectations: '',
+        tried: '',
+        notWorking: '',
+        zoom: '',
       });
       toast.success('Success: ticket submitted.', {
         position: 'top-right',
@@ -84,8 +85,8 @@ export default class TicketForm extends Component {
             <input
               onChange={this.onChange}
               type="text"
-              name="studentName"
-              value={this.state.studentName}
+              name="student"
+              value={this.state.student}
             />
           </label>
           <label>
@@ -102,8 +103,8 @@ export default class TicketForm extends Component {
             <input
               onChange={this.onChange}
               type="text"
-              name="expectedResult"
-              value={this.state.expectedResult}
+              name="expectations"
+              value={this.state.expectations}
             />
           </label>
           <label>
@@ -111,8 +112,8 @@ export default class TicketForm extends Component {
             <input
               onChange={this.onChange}
               type="text"
-              name="attemptedSolution"
-              value={this.state.attemptedSolution}
+              name="tried"
+              value={this.state.tried}
             />
           </label>
           <label>
@@ -120,8 +121,8 @@ export default class TicketForm extends Component {
             <input
               onChange={this.onChange}
               type="text"
-              name="suspectedIssue"
-              value={this.state.suspectedIssue}
+              name="notWorking"
+              value={this.state.notWorking}
             />
           </label>
           <label>
@@ -129,8 +130,8 @@ export default class TicketForm extends Component {
             <input
               onChange={this.onChange}
               type="text"
-              name="zoomLink"
-              value={this.state.zoomLink}
+              name="zoom"
+              value={this.state.zoom}
             />
           </label>
           <button type="submit">Submit</button>

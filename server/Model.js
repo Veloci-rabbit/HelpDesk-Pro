@@ -11,9 +11,7 @@ console.log('Successfully connected to Mongo DB')
 }).catch(error => console.log(error));
 
 const Schema = mongoose.Schema;
-const date = new Date("2016-05-18T16:00:00Z");
 
-//console.log('hello')
 const ticketSchema = new Schema({
   header: {
     type: String,
@@ -27,6 +25,10 @@ const ticketSchema = new Schema({
   student: {
     type: String,
     required: false,
+  },
+  problem:{
+    type: String, 
+    required: true, 
   },
   fellow: {
     type: String,
@@ -53,5 +55,5 @@ const ticketSchema = new Schema({
     required: false,
   },
 });
-const TicketForm = mongoose.model('ticket',ticketSchema);
+const TicketForm = mongoose.model('ticket', ticketSchema);
 module.exports = TicketForm

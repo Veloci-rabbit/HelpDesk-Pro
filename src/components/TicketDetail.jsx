@@ -6,23 +6,39 @@
 //on acceptance, button triggers notification that ticket has been accepted
 //create a 
  import React, { Component } from 'react'
+ import axios from 'axios';
  
  export default class TicketDetail extends Component {
 //this.props.tickets that displays all item information
 //tickets.(whatever item)
     constructor(props){
         super(props)
+        
+        this.updateStatus = this.updateStatus.bind(this);
+    }
+
+    async updateStatus() {
+        // axios put request... pass id, status
+        try {
+            const body = JSON.stringify({ id : this.props.ticket._id, status : 'resolved' });
+            await axios.patch('/api/resolveTicket', body, {
+              headers: { 'content-type': 'application/json' },
+            }).then((data) => console.log(data))
+        } catch(err) {
+            console.log(err)
+        }
     }
     
      render() {
          return (
              <div>
-                 <p>{this.props.ticket.studentName}</p>
+                 <p>{this.props.ticket.student}</p>
                  <p>{this.props.ticket.problem}</p>
-                 <p>{this.props.ticket.expectedResult}</p>
-                 <p>{this.props.ticket.attemptedSolution}</p>
-                 <p>{this.props.ticket.suspectedIssue}</p>
-                 <p>{this.props.ticket.zoomLink}</p>
+                 <p>{this.props.ticket.expectations}</p>
+                 <p>{this.props.ticket.tried}</p>
+                 <p>{this.props.ticket.notWorking}</p>
+                 <p>{this.props.ticket.zoom}</p>
+                 <button onClick={this.updateStatus}>Resolve</button>
              </div>
          )
      }

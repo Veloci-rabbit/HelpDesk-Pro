@@ -19,7 +19,7 @@ export default class Ticket extends Component {
   render() {
     return (
       <div onClick={this.updateActiveTicket}>
-        <h1>{this.props.details.student}</h1>
+        <h1>{this.props.details.problem}</h1>
       </div>
     );
   }

@@ -1,26 +1,26 @@
 /**
  * @name Ticket
- * @desc Displays individual tickets in TicketDisplay component. 
+ * @desc Displays individual tickets in TicketDisplay component.
  */
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class Ticket extends Component {
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
-      this.updateActiveTicket = this.updateActiveTicket.bind(this);
-    }
+    this.updateActiveTicket = this.updateActiveTicket.bind(this);
+  }
 
-    updateActiveTicket() {
-      this.props.selectedTicket(this.props.details)
-    }
+  updateActiveTicket() {
+    this.props.selectedTicket(this.props.details);
+  }
 
-    render() {
-        return (
-            <div onClick={this.updateActiveTicket}>
-                <h1>{this.props.details.studentName}</h1>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div onClick={this.updateActiveTicket}>
+        <h1>{this.props.details.student}</h1>
+      </div>
+    );
+  }
 }

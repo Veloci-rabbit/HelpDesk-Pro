@@ -1,19 +1,19 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "index_bundle.js",
   },
   mode: process.env.NODE_ENV,
   devServer: {
-    publicPath: '/',
+    publicPath: "/",
     proxy: {
       "/api/**": "http://localhost:3000",
-    }
+    },
   },
   module: {
     rules: [
@@ -21,12 +21,11 @@ module.exports = {
         test: /\.jsx?/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
-
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
       },
       {
         test: /\.s?css/,
@@ -34,15 +33,14 @@ module.exports = {
         // use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'sass-loader']
         // },
 
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
-    ]
+    ],
   },
-  mode: 'development',
+  mode: "development",
   plugins: [
-
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    })
-  ]
-}
+      template: "src/index.html",
+    }),
+  ],
+};

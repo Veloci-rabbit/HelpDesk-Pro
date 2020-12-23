@@ -13,10 +13,6 @@ console.log('Successfully connected to Mongo DB')
 const Schema = mongoose.Schema;
 
 const ticketSchema = new Schema({
-  header: {
-    type: String,
-    required: true,
-  },
   status: {
     type: String,
     required: true,

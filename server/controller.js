@@ -4,7 +4,6 @@ const ticketController = {};
 //setTicket will create a new Ticket in our DB. Please Note: Not all fields are required, check schema
 ticketController.setTicket = (req, res) => {
   const {
-    header,
     status,
     student,
     problem,
@@ -17,7 +16,6 @@ ticketController.setTicket = (req, res) => {
   } = req.body;
   TicketForm.create(
     {
-      header,
       status,
       student,
       problem,

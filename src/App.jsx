@@ -14,20 +14,22 @@ import ViewTickets from './components/ViewTickets';
 function App() {
   return (
     // React Router boilerplate code
+    <div className="container-fluid">
     <Router>
-      <main>
-        <nav>
-          <ul>
-            <li><Link to="/">New Ticket</Link></li>
-            <li><Link to='/viewtickets'>View Tickets</Link></li>
+        <div className="row ml-3">
+          <ul className="list-inline">
+            <li className='list-inline-item mr-3'><Link to="/">New Ticket</Link></li>
+            <li className='list-inline-item'><Link to='/viewtickets'>View Tickets</Link></li>
           </ul>
-        </nav>
+        </div>
+        <div className="container">
         <Switch>
           <Route exact path="/" component={TicketForm} />
           <Route path="/viewtickets" component={ViewTickets} />
         </Switch>
-      </main>
+        </div>
     </Router>
+    </div>
   );
 }
 

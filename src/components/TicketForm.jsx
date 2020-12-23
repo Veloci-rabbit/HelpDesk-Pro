@@ -36,7 +36,6 @@ export default class TicketForm extends Component {
     const newTicket = {
       student: this.state.student,
       problem: this.state.problem,
-      header: 'Static for now',
       status: 'Open',
       expectations: this.state.expectations,
       tried: this.state.tried,
@@ -74,68 +73,79 @@ export default class TicketForm extends Component {
 
   render() {
     return (
-      <div>
-        <ToastContainer />
-        <form
-          onSubmit={this.onSubmit}
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          <label>
-            Student:
-            <input
-              onChange={this.onChange}
-              type="text"
-              name="student"
-              value={this.state.student}
-            />
-          </label>
-          <label>
-            Problem:
-            <input
-              onChange={this.onChange}
-              type="text"
-              name="problem"
-              value={this.state.problem}
-            />
-          </label>
-          <label>
-            What we expected to happen:
-            <input
-              onChange={this.onChange}
-              type="text"
-              name="expectations"
-              value={this.state.expectations}
-            />
-          </label>
-          <label>
-            What we've tried:
-            <input
-              onChange={this.onChange}
-              type="text"
-              name="tried"
-              value={this.state.tried}
-            />
-          </label>
-          <label>
-            Why we expect it's not working:
-            <input
-              onChange={this.onChange}
-              type="text"
-              name="notWorking"
-              value={this.state.notWorking}
-            />
-          </label>
-          <label>
-            Zoom Room:
-            <input
-              onChange={this.onChange}
-              type="text"
-              name="zoom"
-              value={this.state.zoom}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+      <div className="row justify-content-between">
+        <div className="col-6">
+          <ToastContainer />
+          <form
+            onSubmit={this.onSubmit}
+            style={{ display: 'flex', flexDirection: 'column' }}
+          >
+            <label>
+              Student: 
+              <input
+              className="form-control"
+                onChange={this.onChange}
+                type="text"
+                name="student"
+                value={this.state.student}
+              />
+       </label>
+            <label>
+              Problem:
+              <textarea className="form-control"
+                style={{width: '100%'}}
+                onChange={this.onChange}
+                type="text"
+                name="problem"
+                value={this.state.problem}
+              />
+            </label>
+            <label>
+              What we expected to happen:
+              <textarea className="form-control"
+                style={{width: '100%'}}
+                onChange={this.onChange}
+                type="text"
+                name="expectations"
+                value={this.state.expectations}
+              />
+            </label>
+            <label>
+              What we've tried:
+              <textarea className="form-control"
+                style={{width: '100%'}}
+                onChange={this.onChange}
+                type="text"
+                name="tried"
+                value={this.state.tried}
+              />
+            </label>
+            <label>
+              Why we expect it's not working:
+              <textarea className="form-control"
+                style={{width: '100%'}}
+                onChange={this.onChange}
+                type="text"
+                name="notWorking"
+                value={this.state.notWorking}
+              />
+            </label>
+            <label>
+              Zoom Room:
+              <input className="form-control"
+                style={{width: '100%'}}
+                onChange={this.onChange}
+                type="text"
+                name="zoom"
+                value={this.state.zoom}
+              />
+            </label>
+            <button className="btn btn-success" type="submit">Submit</button>
+          </form>
+        </div>
+        <div className="col-5 myBorder">
+
+        </div>
       </div>
     );
   }

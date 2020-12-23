@@ -18,8 +18,11 @@ export default class Ticket extends Component {
 
   render() {
     return (
-      <div onClick={this.updateActiveTicket}>
-        <h1>{this.props.details.problem}</h1>
+      <div style={{width: '90%', margin: '2rem 0', maxHeight: '7rem', overflowY: 'auto' }} className="card cardCustom" onClick={this.updateActiveTicket}>
+      <div className="card-body">
+        <h5 className="card-title"> Name: {this.props.details.student}</h5>          
+        <p className="card-text"> {this.props.details.problem}</p>      
+      </div>
       </div>
     );
   }

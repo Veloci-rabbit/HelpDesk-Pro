@@ -46,18 +46,18 @@ export default class ViewTickets extends Component {
       );
 
     return (
-      <div className="row">
+      <div className="row" className="viewTickets">
         <div id="leftSide" className="col-6">
           <nav className="row">
             <ul className="list-inline">
               <li className="list-inline-item mr-3">
-                <Link to="/viewtickets/all">View All</Link>
+                <Link to="/viewtickets/all" className="link">VIEW ALL</Link>
               </li>
               <li className="list-inline-item mr-3">
-                <Link to="/viewtickets/open">Open</Link>
+                <Link to="/viewtickets/open" className="link">OPEN</Link>
               </li>
               <li className="list-inline-item">
-                <Link to="/viewtickets/resolved">Resolved</Link>
+                <Link to="/viewtickets/resolved" className="link">RESOLVED</Link>
               </li>
             </ul>
           </nav>
@@ -78,7 +78,7 @@ export default class ViewTickets extends Component {
             </Route>
           </Switch>
         </div>
-        <div id="rightSide">{display}</div>
+        <div id="rightSide" className="col-6">{display}</div>
       </div>
     );
   }

@@ -31,14 +31,14 @@
     
      render() {
          return (
-             <div>
+             <div className="ticketDetail" >
                  <p>{this.props.ticket.student}</p>
                  <p>{this.props.ticket.problem}</p>
                  <p>{this.props.ticket.expectations}</p>
                  <p>{this.props.ticket.tried}</p>
                  <p>{this.props.ticket.notWorking}</p>
                  <p>{this.props.ticket.zoom}</p>
-                 <button onClick={this.updateStatus}>Resolve</button>
+                 <button onClick={this.updateStatus}>RESOLVE</button>
              </div>
          )
      }

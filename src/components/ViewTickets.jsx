@@ -3,11 +3,6 @@
  * @desc Highest component in hierarchy that displays both Ticket Display and Ticket Detail.
  */
 
-// create links to View All, Open, and Resolved
-// render Ticket Display Component on left hand side of page
-// if ticket from left hand side is clicked, render Ticket Detail Component on right hand side of the page
-// create Load More button below Ticket Display Componenet on left hand side
-
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import TicketDisplay from './TicketDisplay';
@@ -23,18 +18,35 @@ export default class ViewTickets extends Component {
     };
 
     this.setActiveTicket = this.setActiveTicket.bind(this);
+    this.updateTicketStatus = this.updateTicketStatus.bind(this);
   }
 
+  // setActiveTicket method sets the current ticket into this.state.activeTicket.
+  // The active ticket will be displayed based on the conditional rendering logic below.
   setActiveTicket(ticket) {
     this.setState({
       activeTicket: ticket,
     });
   }
 
+  async updateTicketStatus(ticket) {
+    try {
+      const body = JSON.stringify({ id: ticket._id, status: 'Resolved' });
+      await axios
+        .patch('/api/resolveTicket', body, {
+          headers: { 'content-type': 'application/json' },
+        })
+        .then((data) => console.log(data));
+      const { data } = await axios.get('/api/getTickets');
+      this.setState({ tickets: data });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async componentDidMount() {
     // Axios GET request to backend and then { data } to unpack all tickets from response.
     const { data } = await axios.get('/api/getTickets');
-    console.log(data);
     this.setState({ tickets: data });
   }
 
@@ -42,7 +54,7 @@ export default class ViewTickets extends Component {
     // Conditional logic to display the active ticket if the current state is not null.
     const display =
       this.state.activeTicket === null ? null : (
-        <TicketDetail ticket={this.state.activeTicket} />
+        <TicketDetail ticket={this.state.activeTicket} updateTicketStatus={this.updateTicketStatus} />
       );
 
     return (
@@ -64,17 +76,13 @@ export default class ViewTickets extends Component {
 
           <Switch>
             <Route exact path="/viewtickets/all">
-              <TicketDisplay
-                filter="all"
-                tickets={this.state.tickets}
-                setActiveTicket={this.setActiveTicket}
-              />
+              <TicketDisplay filter="all" tickets={this.state.tickets} setActiveTicket={this.setActiveTicket} />
             </Route>
             <Route exact path="/viewtickets/open">
-              <TicketDisplay filter="open" tickets={this.state.tickets} />
+              <TicketDisplay filter="Open" tickets={this.state.tickets} setActiveTicket={this.setActiveTicket} />
             </Route>
             <Route exact path="/viewtickets/resolved">
-              <TicketDisplay filter="resolved" tickets={this.state.tickets} />
+              <TicketDisplay filter="Resolved" tickets={this.state.tickets} setActiveTicket={this.setActiveTicket} />
             </Route>
           </Switch>
         </div>

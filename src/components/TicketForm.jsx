@@ -81,7 +81,7 @@ export default class TicketForm extends Component {
             style={{ display: 'flex', flexDirection: 'column' }}
           >
             <label>
-              Student: 
+              STUDENT: 
               <input
               className="form-control"
                 onChange={this.onChange}
@@ -91,7 +91,7 @@ export default class TicketForm extends Component {
               />
        </label>
             <label>
-              Problem:
+              PROBLEM:
               <textarea className="form-control"
                 style={{width: '100%'}}
                 onChange={this.onChange}
@@ -101,7 +101,7 @@ export default class TicketForm extends Component {
               />
             </label>
             <label>
-              What we expected to happen:
+              WHAT WE EXPECTED TO HAPPEN:
               <textarea className="form-control"
                 style={{width: '100%'}}
                 onChange={this.onChange}
@@ -111,7 +111,7 @@ export default class TicketForm extends Component {
               />
             </label>
             <label>
-              What we've tried:
+              WHAT WE'VE TRIED:
               <textarea className="form-control"
                 style={{width: '100%'}}
                 onChange={this.onChange}
@@ -121,7 +121,7 @@ export default class TicketForm extends Component {
               />
             </label>
             <label>
-              Why we expect it's not working:
+              WHY WE EXPECT IT'S NOT WORKING:
               <textarea className="form-control"
                 style={{width: '100%'}}
                 onChange={this.onChange}
@@ -131,7 +131,7 @@ export default class TicketForm extends Component {
               />
             </label>
             <label>
-              Zoom Room:
+              ZOOM ROOM:
               <input className="form-control"
                 style={{width: '100%'}}
                 onChange={this.onChange}
@@ -140,7 +140,7 @@ export default class TicketForm extends Component {
                 value={this.state.zoom}
               />
             </label>
-            <button className="btn btn-success" type="submit">Submit</button>
+            <button className="btn btn-success" type="submit">SUBMIT</button>
           </form>
         </div>
         <div className="col-5 myBorder">

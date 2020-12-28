@@ -30,6 +30,6 @@ export default class TicketDisplay extends Component {
           );
       }
     }
-    return <div style={{ maxHeight: '500px', overflowY: 'auto'}}>{tickets}</div>;
+    return <div style={{ maxHeight: '500px', overflowY: 'auto'}} className="scroller">{tickets}</div>;
   }
 }

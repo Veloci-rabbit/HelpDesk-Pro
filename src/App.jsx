@@ -16,10 +16,10 @@ function App() {
     // React Router boilerplate code
     <div className="container-fluid">
     <Router>
-        <div className="row ml-3">
+        <div className="row ml-3" >
           <ul className="list-inline">
-            <li className='list-inline-item mr-3'><Link to="/">New Ticket</Link></li>
-            <li className='list-inline-item'><Link to='/viewtickets'>View Tickets</Link></li>
+            <li className='list-inline-item mr-3'><Link to="/" className="link">NEW TICKET</Link></li>
+            <li className='list-inline-item'><Link to='/viewtickets'className="link">VIEW TICKETS</Link></li>
           </ul>
         </div>
         <div className="container">

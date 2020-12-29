@@ -1,19 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;700&display=swap');
+$base-color: rgb(102, 199, 5);
+$back-color: rgb(17, 18, 18);
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: $back-color;
+  color: $base-color;
+}
+
+*::-webkit-scrollbar-track {
+  background: orange !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+@font-face {
+  font-family: 'alarmClock';
+  src: url(./fonts/alarmClock.ttf) format('truetype');
+}
+
+.customLink {
+  text-decoration: none !important;
+  font-size: 26px;
+  color: $base-color;
+}
+
+.customLink:hover {
+  color: white !important;
+}
+.btn {
+  background-color: $base-color !important;
+}
+
+textarea,
+input {
+  background-color: rgb(17, 18, 18) !important;
+  color: white !important;
+  font-family: JetBrains Mono !important;
 }
 
 .myBorder {
   border: 1px solid black;
 }
 
-.cardCustom:hover {
-  cursor: pointer;
-  box-shadow: 5px 7px 5px blue;
+.cardCustom {
+  font-family: JetBrains Mono;
 }
 
+.cardCustom:hover {
+  cursor: pointer;
+  box-shadow: 5px 7px 5px $base-color;
+}
 
+.container-fluid {
+  font-family: alarmClock;
+  min-height: 100%;
+  height: 100%;
+}
 
+.ticketDetail {
+  margin-top: 4.5rem;
+  max-width: 35%;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 2rem;
+  position: fixed;
+  font-family: JetBrains Mono;
+}
 
+.viewTickets {
+  display: flex;
+}
 
+.brand {
+  font-size: 40px;
+}
+
+.resolveBtn {
+  border-radius: 4px;
+  background-color: $base-color;
+  color: black;
+  padding: 1rem 1.5rem;
+}
+
+.detailLabel {
+  color: white !important;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Toastify__toast--success {
+  background: none !important;
+}

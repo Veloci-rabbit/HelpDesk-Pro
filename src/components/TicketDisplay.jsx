@@ -3,33 +3,18 @@
  * @desc Left-hand side of View Tickets page.  Displays individual submitted tickets.
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import Ticket from './Ticket';
 
-export default class TicketDisplay extends Component {
-  constructor(props) {
-    super(props);
-    this.selectedTicket = this.selectedTicket.bind(this);
-  }
-
-  selectedTicket(ticket) {
-    this.props.setActiveTicket(ticket);
-  }
-
-  render() {
-    const tickets = [];
-    for (const ticket of this.props.tickets) {
-      if (this.props.filter === 'all') {
-        tickets.push(
-          <Ticket details={ticket} selectedTicket={this.selectedTicket} />
-        );
-      } else {
-        if (ticket.status === this.props.filter)
-          tickets.push(
-            <Ticket details={ticket} selectedTicket={this.selectedTicket} />
-          );
-      }
+export default function TicketDisplay({ tickets, setActiveTicket, filter }) {
+  const ticketsArray = [];
+  for (const ticket of tickets) {
+    if (filter === 'all') {
+      ticketsArray.push(<Ticket key={ticket._id} details={ticket} setActiveTicket={setActiveTicket} />);
+    } else {
+      if (ticket.status === filter)
+        ticketsArray.push(<Ticket key={ticket._id} details={ticket} setActiveTicket={setActiveTicket} />);
     }
-    return <div style={{ maxHeight: '500px', overflowY: 'auto'}} className="scroller">{tickets}</div>;
   }
+  return <div style={{ height: '100%', marginLeft: '3rem', overflowY: 'auto' }}>{ticketsArray}</div>;
 }

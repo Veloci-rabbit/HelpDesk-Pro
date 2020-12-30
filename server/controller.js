@@ -1,5 +1,5 @@
-const TicketForm = require('../server/Model');
-
+const TicketForm = require('./Model');
+const dbSQL = require('./SQLmodel')
 //setTicket will create a new Ticket in our DB. Please Note: Not all fields are required, check schema
 exports.newTicket = (req, res) => {
   const { status, student, problem, fellow, expectations, tried, notWorking, zoom, resolvedNotes } = req.body;

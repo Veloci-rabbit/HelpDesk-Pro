@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 
 
-const MONGO_URI = 'mongodb+srv://C_J_S:cEXzKdZwci44JkTU@cluster0.xxyaq.mongodb.net/Cluster0?retryWrites=true&w=majority';
+const MONGO_URI = 'mongodb+srv://recipeAppUser:focusonlearning8@cluster0.yu8e1.mongodb.net/tickets?retryWrites=true&w=majority';
 mongoose.connect (MONGO_URI , {
 useNewUrlParser : true, 
 useUnifiedTopology: true, 
@@ -20,7 +20,7 @@ const ticketSchema = new Schema({
   date: { type: Date, default: Date.now },
   student: {
     type: String,
-    required: false,
+    required: true,
   },
   problem:{
     type: String, 

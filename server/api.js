@@ -1,10 +1,10 @@
 const express = require('express');
 
-const { setTicket, getTickets, resolveTicket } = require('./controller');
+const { newTicket, getTickets, resolveTicket } = require('./controller');
 
 const router = express.Router();
 
-router.post('/newTicket', setTicket); //create new ticket
+router.post('/newTicket', newTicket); //create new ticket
 
 router.get('/getTickets', getTickets); //get all tickets to display
 

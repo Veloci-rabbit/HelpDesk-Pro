@@ -1,7 +1,7 @@
 const TicketForm = require('../server/Model');
 
 //setTicket will create a new Ticket in our DB. Please Note: Not all fields are required, check schema
-exports.setTicket = (req, res) => {
+exports.newTicket = (req, res) => {
   const { status, student, problem, fellow, expectations, tried, notWorking, zoom, resolvedNotes } = req.body;
   TicketForm.create(
     {
@@ -44,6 +44,6 @@ exports.resolveTicket = (req, res) => {
       return res.status(500).send(err);
     }
     //the result should be the updated version of the ticket you updated
-    return res.status(200).send(`Ticket has been resolved. Ticket Info: ${result}`);
+    return res.status(200).json(`Ticket has been resolved. Ticket Info: ${result}`);
   });
 };

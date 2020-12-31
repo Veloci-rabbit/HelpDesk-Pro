@@ -54,23 +54,25 @@ exports.resolveTicket = (req, res) => {
  * Authentiction & Authorization
  */
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
   const { username, password } = req.body;
   const findQuery = `SELECT * FROM users WHERE username = $1`
   dbSQL.query(findQuery, [username])
     .then((data) => {
       const hashedPassword = data.rows[0].password;
       bcrypt.compare(password, hashedPassword)
-      .then((result) => {
-        if (result) {
-          res.status(200).json(username);
-        } else {
-          res.status(404).json({error: 'User not found'});
-        }a
-      })
+        .then((result) => {
+          if (result) {
+            // console.log('from login', username);
+            res.locals.username = username;
+            return next();
+          } else {
+            res.status(404).json({ error: 'User not found' });
+          }
+        })
     })
     .catch((err) => console.log(err));
-  
+
 }
 
 exports.signup = (req, res) => {
@@ -92,6 +94,28 @@ exports.signup = (req, res) => {
     })
   })
 }
-//set ssid controller
-//uniq id to each fellow
-exports.cookies
+
+exports.setSSIDCookie = (req, res, next) => {
+  const { username } = res.locals;
+  console.log(res.locals)
+  console.log('from setSSIDCookie', username);
+  res.cookie('ssid', username, { httpOnly: true, expires: 0 }).json(username);
+}
+
+exports.checkSSIDCookie = (req, res) => {
+  const { ssid } = req.cookies;
+  const findQuery = `SELECT * FROM users WHERE username = $1`
+  dbSQL.query(findQuery, [ssid])
+    .then((result) => {
+      res.status(200).json({
+        verifiedUser: true,
+      })
+    })
+    .catch((err) => {
+      console.log('Cookie not found', err)
+      res.status(404).json({
+        message: "Cookie not found",
+        error: err,
+      })
+    })
+}

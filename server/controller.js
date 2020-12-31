@@ -63,11 +63,10 @@ exports.login = (req, res) => {
       bcrypt.compare(password, hashedPassword)
       .then((result) => {
         if (result) {
-          console.log('I work');
           res.status(200).json(username);
         } else {
           res.status(404).json({error: 'User not found'});
-        }
+        }a
       })
     })
     .catch((err) => console.log(err));
@@ -89,9 +88,10 @@ exports.signup = (req, res) => {
         console.log('Error in storing encrypted information in dbSQL');
         res.status(500).send(error);
       }
-      res.status(200).json(response);
+      res.sendStatus(200);
     })
   })
 }
-
+//set ssid controller
+//uniq id to each fellow
 exports.cookies

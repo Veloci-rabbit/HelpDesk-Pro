@@ -1,5 +1,7 @@
-const TicketForm = require('./Model');
-const dbSQL = require('./SQLmodel')
+const TicketForm = require('./Model'); // import mongodb
+const dbSQL = require('./SQLmodel') // import postgresdb
+const bcrypt = require('bcrypt'); // import encryption library
+
 //setTicket will create a new Ticket in our DB. Please Note: Not all fields are required, check schema
 exports.newTicket = (req, res) => {
   const { status, student, problem, fellow, expectations, tried, notWorking, zoom, resolvedNotes } = req.body;
@@ -47,3 +49,49 @@ exports.resolveTicket = (req, res) => {
     return res.status(200).json(`Ticket has been resolved. Ticket Info: ${result}`);
   });
 };
+
+/**
+ * Authentiction & Authorization
+ */
+
+exports.login = (req, res) => {
+  const { username, password } = req.body;
+  const findQuery = `SELECT * FROM users WHERE username = $1`
+  dbSQL.query(findQuery, [username])
+    .then((data) => {
+      const hashedPassword = data.rows[0].password;
+      bcrypt.compare(password, hashedPassword)
+      .then((result) => {
+        if (result) {
+          console.log('I work');
+          res.status(200).json(username);
+        } else {
+          res.status(404).json({error: 'User not found'});
+        }
+      })
+    })
+    .catch((err) => console.log(err));
+  
+}
+
+exports.signup = (req, res) => {
+  const { username, password } = req.body;
+  const saltRounds = 10;
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) {
+      console.log('Error in bcrypting password');
+      res.status(500).send(err);
+    }
+    console.log('Encrypted successfully')
+    const createQuery = 'INSERT INTO users(username, password) VALUES($1, $2)'
+    dbSQL.query(createQuery, [username, hash], (error, response) => {
+      if (error) {
+        console.log('Error in storing encrypted information in dbSQL');
+        res.status(500).send(error);
+      }
+      res.status(200).json(response);
+    })
+  })
+}
+
+exports.cookies

@@ -19,9 +19,10 @@ function App() {
   const [userName, setuserName] = useState('');
   const [verifiedUser, setverifiedUser] = useState({ status: false });
   useEffect(()=>{
-      axios.get('/api/verifyuser').then(response =>{
+      axios.get('/api/checkuser').then(response =>{
         console.log(response)
-       //setverifiedUser(response);
+        setverifiedUser({ status : response.data.status});
+        setuserName(response.data.ssid.toUpperCase())
       }).catch(error => console.log(error))
   }, []);
   return (

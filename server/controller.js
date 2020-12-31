@@ -107,9 +107,13 @@ exports.checkSSIDCookie = (req, res) => {
   const findQuery = `SELECT * FROM users WHERE username = $1`
   dbSQL.query(findQuery, [ssid])
     .then((result) => {
-      res.status(200).json({
-        verifiedUser: true,
-      })
+      if (result.rows.length) {
+        res.status(200).json({
+          status: true,
+          ssid
+        })  
+      }
+      res.status(400).json({status: false})
     })
     .catch((err) => {
       console.log('Cookie not found', err)

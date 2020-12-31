@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-export default function TicketDetail({ ticket, updateTicketStatus }) {
+export default function TicketDetail({verifiedUser, ticket, updateTicketStatus }) {
   return (
     <div className="ticketDetail">
       <p>
@@ -30,9 +30,10 @@ export default function TicketDetail({ ticket, updateTicketStatus }) {
 
         <a href="#">{ticket.zoom}</a>
       </p>
-      <button className="resolveBtn" onClick={() => updateTicketStatus(ticket)}>
+      {verifiedUser.status ? <button className="resolveBtn" onClick={() => updateTicketStatus(ticket)}>
         Resolve
-      </button>
+      </button> : null}
+     
     </div>
   );
 }

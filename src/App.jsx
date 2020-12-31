@@ -4,7 +4,8 @@ import Ticket from './components/Ticket';
 import TicketForm from './components/TicketForm';
 import ViewTickets from './components/ViewTickets';
 import Login from './components/Login';
-
+import Dropdown from 'react-bootstrap/Dropdown'
+import axios from 'axios'
 /**
  * @terms
  * Link: serves similar purpose as an <a> tag.
@@ -13,8 +14,17 @@ import Login from './components/Login';
  */
 
 function App() {
+  ///set state for Log in 
+
   const [userName, setuserName] = useState('');
   const [verifiedUser, setverifiedUser] = useState({ status: false });
+  useEffect(()=>{
+      axios.get('/api/checkuser').then(response =>{
+        console.log(response)
+        setverifiedUser({ status : response.data.status});
+        setuserName(response.data.ssid.toUpperCase())
+      }).catch(error => console.log(error))
+  }, []);
   return (
     // React Router boilerplate code
     <div className='container-fluid'>
@@ -40,15 +50,22 @@ function App() {
               <Link className='customLink' to='/login'>
                 LOG IN
               </Link>
-            ) : (
-                <div>{userName}</div>
+            ) : (          
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    HELLO, {userName}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="http://localhost:8080">LOG OUT</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
             )}
           </div>
         </div>
         <div className='container'>
           <Switch>
             <Route exact path='/' component={TicketForm} />
-            <Route path='/viewtickets' component={ViewTickets} />
+            <Route path='/viewtickets' render={props => (<ViewTickets verifiedUser={verifiedUser} />)} />
             <Route
               path='/login'
               render={(props) => (

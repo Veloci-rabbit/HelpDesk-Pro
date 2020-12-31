@@ -11,6 +11,7 @@ export default function Login(props) {
   /// dconsole.log('setuserName', setuserName);
   function handleClick(e) {
     e.preventDefault();
+    
     const checkUser = {
       username : props.userName,
       password,
@@ -23,7 +24,7 @@ export default function Login(props) {
       .then((data) => {
          props.setverifiedUser({status: true});
           setRedirect({status:true});
-     //console.log(data)
+          props.setuserName(props.userName.toUpperCase())
      }) //set the state of the status of verified user)
       .catch((error) => console.log(error));
   }
@@ -33,7 +34,7 @@ export default function Login(props) {
   return (
     <Form className='needs-validation' onSubmit={handleClick}>
       <Form.Group controlId='formUsername'>
-        <Form.Label>Username</Form.Label>
+        <Form.Label>USERNAME</Form.Label>
         <Form.Control
           type='text'
           placeholder='Enter username'
@@ -43,7 +44,7 @@ export default function Login(props) {
         />
       </Form.Group>
       <Form.Group controlId='formBasicPassword'>
-        <Form.Label>Password</Form.Label>
+        <Form.Label>PASSWORD</Form.Label>
         <Form.Control
           type='password'
           placeholder='Password'

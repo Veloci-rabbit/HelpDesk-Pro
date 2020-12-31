@@ -41,7 +41,7 @@ function App() {
                 LOG IN
               </Link>
             ) : (
-              <div>Testing Username</div>
+                <div>{userName}</div>
             )}
           </div>
         </div>

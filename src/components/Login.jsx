@@ -1,30 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import {Redirect} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+
 export default function Login(props) {
   const [password, setPassword] = useState('');
-  console.log('props', props);
+  const [redirect, setRedirect] = useState({status: false});
+  ///console.log('props', props);
   /// dconsole.log('setuserName', setuserName);
   function handleClick(e) {
     e.preventDefault();
     const checkUser = {
-      userName,
+      username : props.userName,
       password,
     };
-
-    
-
-    //will need to readd after backend has been configured
-    // axios
-    //   .post('/api/login', checkUser, {
-    //     headers: { 'Content-Type': 'application/json' },
-    //   })
-    //   .then((data) => {
-    //      props.setverifiedUser({status: true})
-    //  console.log(data)
-     //} //set the state of the status of verified user)
-    //   .catch((error) => console.log(error));
+ 
+    axios
+      .post('/api/login', checkUser, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+      .then((data) => {
+         props.setverifiedUser({status: true});
+          setRedirect({status:true});
+     //console.log(data)
+     }) //set the state of the status of verified user)
+      .catch((error) => console.log(error));
+  }
+  if (redirect.status) {
+    return <Redirect to="/viewtickets" />;
   }
   return (
     <Form className='needs-validation' onSubmit={handleClick}>

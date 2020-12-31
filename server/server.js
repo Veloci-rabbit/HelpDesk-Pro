@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const apiRouter = require('./api.js');
 const app = express();
 const PORT = 3000;
-const apiRouter = require('./api.js');
 
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.json());
+app.use(cookieParser())
+
 //The API endpoint will direct all ticket requests such as
 //setting newTicket, updating Ticket, and deleting a Ticket to the API router file
 app.use('/api', apiRouter);

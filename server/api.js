@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { newTicket, getTickets, resolveTicket, login, signup } = require('./controller');
+const { newTicket, getTickets, resolveTicket, login, signup, setSSIDCookie, checkSSIDCookie } = require('./controller');
 
 const router = express.Router();
 
@@ -13,8 +13,9 @@ router.patch('/resolveTicket', resolveTicket); //changes status to resolved, thi
 /**
  * Authentication
  */
+router.get('/checkuser', checkSSIDCookie)
 
-router.post('/login', login)
+router.post('/login', login, setSSIDCookie)
 
 router.post('/signup', signup)
 

@@ -1,11 +1,13 @@
 describe('These tests check App Endpoints', () => {
   it('Visit localhost:8080', () => {
     cy.visit('http://localhost:8080')
+    cy.pause()
 
   })
 
   it('Visit /viewtickets endpoint', () => {
     cy.visit('http://localhost:8080')
+   
     cy.contains('VIEW TICKETS').click()
     cy.url()
     .should('include', '/viewtickets')
@@ -13,6 +15,7 @@ describe('These tests check App Endpoints', () => {
 
   it('Visit /viewtickets/all endpoint', () => {
     cy.visit('http://localhost:8080')
+    
     cy.contains('VIEW TICKETS').click()
     cy.contains('VIEW ALL').click()
     cy.url()
@@ -21,6 +24,7 @@ describe('These tests check App Endpoints', () => {
 
   it('Visit /viewtickets/open endpoint', () => {
     cy.visit('http://localhost:8080')
+    
     cy.contains('VIEW TICKETS').click()
     cy.contains('OPEN').click();
     cy.url()
@@ -29,6 +33,7 @@ describe('These tests check App Endpoints', () => {
 
   it('Visit /viewtickets/resolved endpoint', () => {
     cy.visit('http://localhost:8080')
+    
     cy.contains('VIEW TICKETS').click();
     cy.contains('RESOLVED').click()
     cy.url()
@@ -40,6 +45,7 @@ describe('These tests check for creating new ticket', () => {
   
   it('Handle user submission', () => {
     cy.visit('http://localhost:8080')
+      cy.pause()
       .get('input[name="student"]')
       .type('John')
       .should('have.value', 'John')
